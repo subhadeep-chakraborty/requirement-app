@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator  # ✅ ADDED
 from typing import Optional
 from enum import Enum  
-
 
 
 class RequirementStatus(str, Enum):
@@ -14,6 +13,14 @@ class RequirementCreate(BaseModel):
     title: str
     description: Optional[str] = None
     status: RequirementStatus   
+
+
+    @field_validator("title")
+    @classmethod
+    def validate_title(cls, v):
+        if not v or not v.strip():
+            raise ValueError("Title is required")  
+        return v.strip()
 
 
 class RequirementResponse(BaseModel):
