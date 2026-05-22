@@ -4,10 +4,11 @@ from jose import jwt, JWTError
 from fastapi.security import OAuth2PasswordBearer
 from app.core.exceptions import AuthenticationError
 from fastapi import Depends
+from app.core.config import settings
 
 
-SECRET_KEY = "super-secret-key" 
-ALGORITHM = "HS256"
+SECRET_KEY = settings.SECRET_KEY 
+ALGORITHM = settings.ALGORITHM
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")

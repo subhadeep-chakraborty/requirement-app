@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken, removeToken, isTokenExpired } from "../utils/token";
 
 const api = axios.create({
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 // Request interceptor
